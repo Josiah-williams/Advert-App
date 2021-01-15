@@ -1,0 +1,49 @@
+.navbar-container {
+    nav {
+      display: flex;
+      box-shadow: -2rem 1rem 2rem rgb(236, 236, 236);
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      ul {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px;
+  
+        li {
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+  
+  .nav--button {
+    .plain-text();
+    text-transform: capitalize;
+    border: none;
+    background: none;
+    transition: color 0.3s ease-in-out;
+    font-weight: bold;
+    &:hover,
+    &:focus {
+      color: @nav-item-highlight;
+    }
+  }
+  
+  .nav--link {
+    .plain-text();
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    border: none;
+    background: none;
+    transition: color 0.3s ease-in-out;
+    font-weight: bold;
+    &:hover,
+    &:focus,
+    &.active {
+      color: @nav-item-highlight;
+    }
+  }
+  

@@ -1,0 +1,106 @@
+.card-container {
+    position: relative;
+    max-width: 380px;
+    min-width: 300px;
+    width: 90%;
+    padding: 40px 30px 30px;
+    background: @main-background-color;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin: 20px 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+  }
+  
+  .presentational-container {
+    width: 100%;
+    padding: 0 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  
+  .card--title {
+    .heading();
+    display: block;
+    text-align: start;
+    margin-bottom: 20px;
+  }
+  
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    .data-label {
+      .label();
+      text-align: start;
+    }
+    .data-value {
+      .plain-text();
+      text-align: end;
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+    &:last-of-type{
+      margin-bottom: 20px;
+    }
+  }
+  
+  .card--button_container {
+    position: absolute;
+    display: flex;
+    top: 5px;
+    right: 5px;
+  }
+  
+  .card--button--edit {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    transform: scale(0.7);
+  }
+  
+  .pickups {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+    color: rgba(31, 32, 65, 0.7);
+    margin: 10px;
+    p {
+      display: flex;
+    }
+  }
+  
+  .button2 {
+    background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+    border: 1px solid #bc9cff;
+    border-radius: 22px;
+    padding: 10px 100px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .business-card-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  
+    a {
+      margin: 5px;
+      cursor: pointer;
+    }
+  }
+  
