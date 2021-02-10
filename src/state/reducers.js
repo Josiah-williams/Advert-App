@@ -57,3 +57,39 @@ export function signupFormReducer(state = initialRegisterFormState, action) {
       return state;
   }
 }
+
+const advertFormState = {
+dashboard: {
+  clicks: 0,
+  show: true,
+  advertName: '',
+  websiteUrl: '',
+  country: '',
+  tags: '',
+  days: '',
+  date: '',
+  dateString: '',
+}};
+
+export const addadvertformReducer = (state = advertFormState, action) => {
+  switch (action.type) {
+    case types.INPUT_CHANGE:
+      return {
+        ...state,
+        [action.payload.inputName]: action.payload.inputValue
+      };
+      case types.POST_ADVERTS_SUCCESS:
+        return {
+          ...state,
+          isFetching:false,
+          items: action.payload,
+          error: ''
+        };
+        case types.POST_ADVERTS_FAILURE:
+        return {
+          ...state,
+          isFetching:false,
+          error:action.payload
+        }
+    }
+}
