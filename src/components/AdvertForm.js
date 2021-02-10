@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 // import {axiosWithAuth} from "../components/auth/axiosWithAuth";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import Examples from "./Countries"
 import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
 import DayIncrement from "../components/user/Date";
+import {additems} from  "../state/actionCreators";
+import {connect} from "react-redux"
 import '../styles.css';
 import {
   tabletPortrait,
@@ -21,6 +23,7 @@ class AdvertForm extends Component {
     super(props);
     let today = new Date();
     this.state = {
+    adverts: {
       clicks: 0,
       show: true,
       advertName: '',
@@ -28,10 +31,10 @@ class AdvertForm extends Component {
       country: '',
       tags: '',
       days: '',
+      date: '',
       dateString: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
-    };
+    }};
   }
-
   handleOnchange = (e) => {
     this.setState({[e.target.name]:e.target.value})
 
@@ -76,6 +79,7 @@ class AdvertForm extends Component {
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
   }
+  
   render() {
     const selectedTags = tags => console.log(tags);
     return (
@@ -112,7 +116,7 @@ class AdvertForm extends Component {
               <Examples
                 id="country"
                 name="country"
-                value= {this.state.countries}
+                value= {this.state.country}
                 className="form--input"
               />
               <label htmlFor="tags">tags</label>
@@ -129,13 +133,13 @@ class AdvertForm extends Component {
               DecreaseItem={this.DecreaseItem} 
               clicks={this.state.clicks} show={this.state.show} 
               name="date"
-              value= {this.state.value}
+              value= {this.state.date}
               />
                 {
             }
               <Calender dateString={this.state.dateString} datePickerHandler={this.handleDatepickerChange} 
               name="calender"
-              value= {this.state.calender} 
+              value= {this.state.dateString} 
               />
                 </Div>
               <label className="form--label">
@@ -148,9 +152,9 @@ class AdvertForm extends Component {
               name="days" 
               className="form--input"
               />
-              <span className="input--label">Website Url</span>
+              <span className="input--label">How many to run per day</span>
                </label>
-               <button className="button-primary button-big" id="button" type="submit">
+               <button className="button-primary button-big" id="button" type="submit" onClick={() => history.push("/payment")}>
             Submit
           </button>
             
@@ -161,6 +165,12 @@ class AdvertForm extends Component {
     )
 
 }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    dashboard: state.adverts.dashboard
+  }
 }
 
 const Div = styled.div `
@@ -285,4 +295,4 @@ const StyledAdd = styled.div`
     }
 }
  `;   
-export default AdvertForm
+export default connect(mapStateToProps, { additems }) (AdvertForm);
