@@ -15,7 +15,6 @@ import {
 
 const Slider = ({ images }) => {
   const history = useHistory();
-  // const GotoPage = () => window.location.href="/Register"
   const slideImage = useRef(null)
   const slideText = useRef(null)
   const { goToPreviousSlide, goToNextSlide } = useSlider(
