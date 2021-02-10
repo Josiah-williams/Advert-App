@@ -295,4 +295,4 @@ const StyledAdd = styled.div`
     }
 }
  `;   
-export default connect(mapStateToProps, { additems }) (AdvertForm);
+export default connect(mapStateToProps, { addadverts }) (AdvertForm);
