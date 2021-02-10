@@ -6,7 +6,7 @@ import Examples from "./Countries"
 import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
 import DayIncrement from "../components/user/Date";
-import {additems} from  "../state/actionCreators";
+import {addadverts} from  "../state/actionCreators";
 import {connect} from "react-redux"
 import '../styles.css';
 import {
