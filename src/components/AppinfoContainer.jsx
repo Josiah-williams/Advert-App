@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import app from "../images/app.svg";
 import advert from "../images/advert.svg";
 
-export default function SignUp() {
+export default function AppinfoContainer() {
   return (
     <div className="signup">
       <h1>We're glad you're here!</h1>
@@ -30,11 +30,6 @@ export default function SignUp() {
           </Link>
           <p>I want to create adverts to promote my  business</p>
         </div>
-        {/* <div>
-          <Link to="/login">
-            <button className="button">Go to login page</button>
-          </Link>
-        </div> */}
       </div>
     </div>
   );
