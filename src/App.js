@@ -11,10 +11,8 @@ import Images from './components/images'
 import Slider from './components/Slider'
 import AppForm from './components/AppForm'
 // import privateRoute from "../../utils/privateRoute";
-import Date from "./components/user/Date";
-import TagsInput from "./components/user/TagsInput"
 // import './App.css'
-import Svg from "./components/AppinfoContainer";
+import Payment from "./pages/payment";
 
 function App({ appState, user, checkToken, logout }) {
   
@@ -42,14 +40,8 @@ function App({ appState, user, checkToken, logout }) {
           <Route exact path="/appform">
             <AppForm />
           </Route>
-          <Route exact path="/date">
-            <Date />
-            </Route>
-          <Route exact path="/tags">
-            <TagsInput />
-            </Route>
-            <Route exact path="/home">
-            <Svg />
+            <Route exact path="/payment">
+            <Payment />
             </Route>
 
           </Switch>
