@@ -38,3 +38,32 @@ export const logout = history => dispatch => {
 	dispatch({ type:types.LOG_OUT})
 	history.push("/login");
   };
+export const addadverts = () => dispatch => {
+	function handleSubmit(credentials, setCredentials) {
+    console.log(credentials, setCredentials)
+    credentials.user_id = 1;
+    axiosWithAuth()
+      .post(
+        "/api/auth/addAdverts",
+        credentials
+      )
+      .then(res => {
+        setNewitemId(res.data);
+		setCredentials.resetForm();
+		history.push("/UserDashboard")
+		
+		dispatch({
+			type: types.POST_ADVERTS_SUCCESS,
+			payload: response.data
+		  });
+		})
+      .catch(error => {
+		console.log(error.message);
+		dispatch({
+			type: types.POST_ADVERTS_FAILURE,
+			payload: error.response.data.Error
+		  });
+      })
+      .finally(() => {
+        setCredentials.setSubmitting(false);
+      })}};
