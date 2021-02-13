@@ -12,7 +12,7 @@ import {
 
 const DayIncrement = props => {
   return <div className="day-container">
-      <label htmlfor="days">Days</label> 
+      <label htmlFor="days">Days</label> 
        <Button1 onClick={props.IncrementItem}><PlusCircleOutlined /></Button1>
         <Button2 onClick={props.DecreaseItem}><MinusCircleOutlined /></Button2>
        
