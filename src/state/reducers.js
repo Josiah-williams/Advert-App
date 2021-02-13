@@ -59,7 +59,6 @@ export function signupFormReducer(state = initialRegisterFormState, action) {
 }
 
 const advertFormState = {
-dashboard: {
   clicks: 0,
   show: true,
   advertName: '',
@@ -69,7 +68,7 @@ dashboard: {
   days: '',
   date: '',
   dateString: '',
-}};
+};
 
 export const addadvertformReducer = (state = advertFormState, action) => {
   switch (action.type) {
