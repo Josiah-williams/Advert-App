@@ -23,7 +23,6 @@ class AdvertForm extends Component {
     super(props);
     let today = new Date();
     this.state = {
-    adverts: {
       clicks: 0,
       show: true,
       advertName: '',
@@ -33,7 +32,7 @@ class AdvertForm extends Component {
       days: '',
       date: '',
       dateString: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
-    }};
+    };
   }
   handleOnchange = (e) => {
     this.setState({[e.target.name]:e.target.value})
@@ -141,7 +140,7 @@ class AdvertForm extends Component {
               name="calender"
               value= {this.state.dateString} 
               />
-                </Div>
+              </Div>
               <label className="form--label">
               <input 
               required
@@ -169,7 +168,7 @@ class AdvertForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    dashboard: state.adverts.dashboard
+    dashboard: state.dashboard
   }
 }
 
@@ -249,7 +248,7 @@ const StyledAdd = styled.div`
   flex-flow: row wrap;
   justify-content: start;
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
 
