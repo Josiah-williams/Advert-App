@@ -8,13 +8,16 @@ import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import {
   loginFormReducer,
-  signupFormReducer}
+  signupFormReducer,
+  advertFormReducer
+}
  from "./state/reducers";
 
 //Combining all the reducers
 const mainReducer = combineReducers({
     login: loginFormReducer,
-    Signup: signupFormReducer,
+    signup: signupFormReducer,
+    // adverts: advertFormReducer,
 });
 
 //Creating a store
