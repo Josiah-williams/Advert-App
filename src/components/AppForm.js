@@ -5,6 +5,7 @@ import { Formik, Form, ErrorMessage} from 'formik';
 import styled from "styled-components";
 import ImageUpload from "../assets/ImageUpload"
 import Popup from "../components/user/popup"
+import { NavLink, useHistory } from "react-router-dom";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -14,6 +15,112 @@ import {
   tabletPortraitLarge,} 
 from "../styles/theme.styles"
 
+
+const Link2Link = styled.div`
+width: 100%;
+.navbar-container {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position:absolute;
+    right:1px;
+    top:11px;
+    padding: 5px;
+    background: #528E6F;
+
+    ul {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+      
+      @media ${mobilePortrait} {
+        z-index: 1;
+        padding-top: 10px;
+        margin-top:31px
+      }
+    }
+    }
+      li {
+        padding: 0 15px;
+
+       
+
+
+      }
+    }
+  }
+}
+.logo-div {
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 10px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+
+.nav--button {
+  .plain-text();
+  text-transform: capitalize;
+  border: none;
+  background: none;
+  transition: color 0.3s ease-in-out;
+  font-weight: bold;
+  &:hover,
+  &:focus {
+    color: @nav-item-highlight;
+  }
+}
+.nav--links {
+  .plain-text();
+  text-decoration: none;
+  text-transform: capitalize;
+  background: none;
+  font-weight: bold;
+  color:#F9FAF9;
+  
+  &:hover,
+  &:focus,
+  &.active {
+    color: #A3E335;
+  }
+}
+}
+.nav--link {
+  .plain-text();
+  text-decoration: none;
+  text-transform: capitalize;
+  border: none;
+  background: none;
+  font-weight: bold;
+  color:  #F9FAF9;
+
+  &:hover,
+  &:focus,
+  &.active {
+    color: #A3E335;
+  }
+}
+
+@media ${tabletPortrait} {
+  background-position: -180px 50px;
+}
+@media ${tabletLandscape} {
+  background-position: bottom left;
+}
+@media ${mobileLandscape} {
+  background-image: none;
+}
+@media ${mobilePortrait} {
+  background-image: none;
+  display: flex;
+  flex-direction: column;
+}
+`;
 class Appform extends React.Component {
   constructor(props) {
   super(props);
@@ -72,8 +179,33 @@ resetForm() {
     this.setState({feedbackIsOpen:false })
   }
   render() {
+    const Logout = e => {
+    localStorage.removeItem("token");
+    };
     const { appName, url, color, logo, message, loading, popupMessage, popupIsOpen, responseStatus, sentMessage } = this.state;
     return (
+      <div className="app">
+      <Link2Link>
+        <header className="navbar-container">
+        <nav>
+          <div className="logo-div">
+          </div>
+         
+          <ul className="right-navbar">
+            <li>
+              <NavLink className="nav--link" to="/UserDashboard" replace>
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav--links" onClick={Logout} to="/login" replace>
+                Log Out
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      </Link2Link>
     <StyledAdd>
       <div className="form-container">   
       <h1 className="card--title">Create your App</h1>       
@@ -138,9 +270,11 @@ resetForm() {
           </>
       </div>
     </StyledAdd>
+    </div>
     )
   }
 }
+
 
 const StyledAdd = styled.div`
 .form-container {

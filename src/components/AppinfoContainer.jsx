@@ -2,10 +2,147 @@ import React from "react";
 import { Link } from "react-router-dom";
 import app from "../images/app.svg";
 import advert from "../images/advert.svg";
+import { NavLink, useHistory } from "react-router-dom";
+import styled from "styled-components"
+import {
+  tabletPortrait,
+  tabletLandscape,
+  mobilePortrait,
+  mobileLandscape,
+  FlexFunc,
+  tabletPortraitLarge,} 
+from "../styles/theme.styles"
 
+const Link2Link = styled.div`
+width: 100%;
+.navbar-container {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background: #528E6F;
+
+    ul {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+      
+      @media ${mobilePortrait} {
+        z-index: 1;
+        padding-top: 10px;
+        margin-top:40px
+      }
+    }
+    }
+      li {
+        padding: 0 15px;
+
+       
+
+
+      }
+    }
+  }
+}
+.logo-div {
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 10px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+
+.nav--button {
+  .plain-text();
+  text-transform: capitalize;
+  border: none;
+  background: none;
+  transition: color 0.3s ease-in-out;
+  font-weight: bold;
+  &:hover,
+  &:focus {
+    color: @nav-item-highlight;
+  }
+}
+.nav--links {
+  .plain-text();
+  text-decoration: none;
+  text-transform: capitalize;
+  background: none;
+  font-weight: bold;
+  color:#F9FAF9;
+  
+  &:hover,
+  &:focus,
+  &.active {
+    color: #A3E335;
+  }
+}
+}
+.nav--link {
+  .plain-text();
+  text-decoration: none;
+  text-transform: capitalize;
+  border: none;
+  background: none;
+  font-weight: bold;
+  color:  #F9FAF9;
+
+  &:hover,
+  &:focus,
+  &.active {
+    color: #A3E335;
+  }
+}
+
+@media ${tabletPortrait} {
+  background-position: -180px 50px;
+}
+@media ${tabletLandscape} {
+  background-position: bottom left;
+}
+@media ${mobileLandscape} {
+  background-image: none;
+}
+@media ${mobilePortrait} {
+  background-image: none;
+  display: flex;
+  flex-direction: column;
+}
+`;
 export default function AppinfoContainer() {
+  const history = useHistory();
+  const Logout = e => {
+    localStorage.removeItem("token");
+    history.push("/login");
   return (
     <div className="signup">
+       <Link2Link>
+        <header className="navbar-container">
+        <nav>
+          <div className="logo-div">
+          </div>
+         
+          <ul className="right-navbar">
+            <li>
+              <NavLink className="nav--link" to="/UserDashboard" replace>
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav--links" onClick={Logout}>
+                Log Out
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      </Link2Link>
       <h1>We're glad you're here!</h1>
       <div className="dives">
         <div className="signup-card">
@@ -28,9 +165,10 @@ export default function AppinfoContainer() {
               Create your advert
             </button>
           </Link>
-          <p>I want to create adverts to promote my  business</p>
+          <p>I want to create adverts to promote my business</p>
         </div>
       </div>
     </div>
   );
+}
 }

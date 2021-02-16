@@ -1,12 +1,11 @@
 import React, {Component} from "react";
-// import {axiosWithAuth} from "../components/auth/axiosWithAuth";
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Examples from "./Countries"
 import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
 import DayIncrement from "../components/user/Date";
-import {addadverts} from  "../state/actionCreators";
+import {getAdverts} from  "../state/actionCreators";
 import {connect} from "react-redux"
 import '../styles.css';
 import {
@@ -18,9 +17,114 @@ import {
   tabletPortraitLarge,} 
 from "../styles/theme.styles"
 
+const Link2Link = styled.div`
+width: 100%;
+.navbar-container {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position:absolute;
+    right:1px;
+    top:11px;
+    padding: 5px;
+    background: #528E6F;
+
+    ul {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+      
+      @media ${mobilePortrait} {
+        z-index: 1;
+        padding-top: 10px;
+        margin-top:31px
+      }
+    }
+    }
+      li {
+        padding: 0 15px;
+
+       
+
+
+      }
+    }
+  }
+}
+.logo-div {
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 10px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+
+.nav--button {
+  .plain-text();
+  text-transform: capitalize;
+  border: none;
+  background: none;
+  transition: color 0.3s ease-in-out;
+  font-weight: bold;
+  &:hover,
+  &:focus {
+    color: @nav-item-highlight;
+  }
+}
+.nav--links {
+  .plain-text();
+  text-decoration: none;
+  text-transform: capitalize;
+  background: none;
+  font-weight: bold;
+  color:#F9FAF9;
+  
+  &:hover,
+  &:focus,
+  &.active {
+    color: #A3E335;
+  }
+}
+}
+.nav--link {
+  .plain-text();
+  text-decoration: none;
+  text-transform: capitalize;
+  border: none;
+  background: none;
+  font-weight: bold;
+  color:  #F9FAF9;
+
+  &:hover,
+  &:focus,
+  &.active {
+    color: #A3E335;
+  }
+}
+
+@media ${tabletPortrait} {
+  background-position: -180px 50px;
+}
+@media ${tabletLandscape} {
+  background-position: bottom left;
+}
+@media ${mobileLandscape} {
+  background-image: none;
+}
+@media ${mobilePortrait} {
+  background-image: none;
+  display: flex;
+  flex-direction: column;
+}
+`;
 class AdvertForm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     let today = new Date();
     this.state = {
       clicks: 0,
@@ -78,10 +182,34 @@ class AdvertForm extends Component {
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
   }
-  
   render() {
+    const Logout = e => {
+      localStorage.removeItem("token");
+    }
     const selectedTags = tags => console.log(tags);
-    return (
+  return (
+      <div className="nav">
+        <Link2Link>
+        <header className="navbar-container">
+        <nav>
+          <div className="logo-div">
+          </div>
+         
+          <ul className="right-navbar">
+            <li>
+              <NavLink className="nav--link" to="/UserDashboard" replace>
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav--links" onClick={Logout} to="/login" replace>
+                Log Out
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      </Link2Link>
     <StyledAdd>
       <div className="form-container">
       <h1 className="card--title">Promote your website</h1>
@@ -161,6 +289,7 @@ class AdvertForm extends Component {
             </>
       </div>
     </StyledAdd>
+    </div>
     )
 
 }
@@ -294,4 +423,4 @@ const StyledAdd = styled.div`
     }
 }
  `;   
-export default connect(mapStateToProps, { addadverts }) (AdvertForm);
+export default connect(mapStateToProps, { getAdverts }) (AdvertForm);
