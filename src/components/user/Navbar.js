@@ -1,8 +1,6 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons" 
-// import Modal from "./Modal/Modal";
-import logo from "../../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import styled from 'styled-components';
 import {
   tabletPortrait,
@@ -21,7 +19,6 @@ export default function Navbar({ appState, user, logout }) {
       <header className="navbar-container">
         <nav>
           <div className="logo-div">
-            <img src={logo} className="logo" />
           </div>
          
           <ul className="right-navbar">
@@ -32,7 +29,7 @@ export default function Navbar({ appState, user, logout }) {
             </li>
             <li>
               <NavLink className="nav--links" exact to="/Register" replace>
-                Register
+                Sign up
               </NavLink>
             </li>
           </ul>
@@ -41,7 +38,7 @@ export default function Navbar({ appState, user, logout }) {
       </Link2Link>
     );
   } else {
-    if (user.user_type === "volunteer") {
+    if (user.user_type === "") {
       return (
         <section className="navbar-container">
           <nav>
@@ -123,6 +120,8 @@ width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    background: #528E6F;
+
     ul {
       display: flex;
       justify-content: flex-end;
@@ -170,20 +169,23 @@ width: 100%;
   }
 }
 .nav--links {
-  border: 3px solid #A3E335;
-  height: 200px;
-  width: 200px;
   .plain-text();
   text-decoration: none;
   text-transform: capitalize;
-  background: none;
+  background: blue;
+  padding: 0.5rem;
+  margin: 2rem auto;
+  border-radius: 4px;
   font-weight: bold;
-  color:  #F9FAF9;
+  color:#F9FAF9;
+  
   
   &:hover,
   &:focus,
   &.active {
-    color: #A3E335;
+    background: #fff;
+    color: #6568F4;
+    transition: 250ms;
   }
 }
 }
