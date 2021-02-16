@@ -4,6 +4,7 @@ import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
 import Footer from "../components/user/footer"
 import { useHistory} from "react-router-dom"
 import styled from "styled-components";
+import Navbar from "./user/Navbar";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -13,7 +14,7 @@ import {
   tabletPortraitLarge,} 
   from "../styles/theme.styles"
 
-const Slider = ({ images }) => {
+const Slider = ({ images, appState, user, logout }) => {
   const history = useHistory();
   const slideImage = useRef(null)
   const slideText = useRef(null)
@@ -25,6 +26,7 @@ const Slider = ({ images }) => {
 
   return (
     <div className="slider" ref={slideImage}>
+      <Navbar appState={appState} user={user} logout={logout} />
       <div className="slider--content">
         <button onClick={goToPreviousSlide} className="slider__btn-left">
         <CaretLeftOutlined />
@@ -49,11 +51,11 @@ const Click = styled.div`
   height:67px;
   position:absolute;
   top:495px;
-  background-color:#A3E335;
+  background-color: darkslategray;
   color:white;
   border-radius:5px;
   cursor: pointer;
-  border: 1px solid #A3E335;
+  border: 1px solid darkslategray;
 }
 @media ${mobilePortrait} {
   .click-button{
@@ -62,7 +64,7 @@ const Click = styled.div`
     position absolute;
     top:239px;
     left:106px;
-    border: 1px solid #A3E335;
+    border: 1px solid darkslategray;
 
   }
 }
