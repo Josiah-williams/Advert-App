@@ -30,10 +30,10 @@ export function loginFormReducer(state = initialLoginFormState, action) {
 }
 
 const initialRegisterFormState = {
-  firstname: "",
-  lastname: "",
-  email:"",
-  password: "",
+  firstname: '',
+  lastname: '',
+  email:'',
+  password: '',
   isSubmitting: false
 };
 export function signupFormReducer(state = initialRegisterFormState, action) {
@@ -58,19 +58,20 @@ export function signupFormReducer(state = initialRegisterFormState, action) {
   }
 }
 
-const advertFormState = {
-  clicks: 0,
-  show: true,
-  advertName: '',
-  websiteUrl: '',
-  country: '',
-  tags: '',
-  days: '',
-  date: '',
-  dateString: '',
+const initialadvertFormState = {
+  adverts: [],
+  userAdverts: [],
+  advertName: "",
+  websiteUrl: "",
+  country: "",
+  tags: "",
+  days: "",
+  date: "",
+  dateString: "",
+  isSubmitting: false
 };
 
-export const addadvertformReducer = (state = advertFormState, action) => {
+export const advertFormReducer = (state = initialadvertFormState, action) => {
   switch (action.type) {
     case types.INPUT_CHANGE:
       return {

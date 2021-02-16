@@ -1,23 +1,24 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
+import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
 
-export const PrivateRoute = ({ children, user_type, appState, ...rest }) => {
+// eslint-disable-next-line react/prop-types
+const PrivateRoute = ({ component: Component, ...props }) => {
   return (
     <Route
-      {...rest}
-      render={() =>
-        appState ? children : <Redirect to={{ pathname: "/login" }} />
+      {...props}
+      render={
+        matchProps =>
+          localStorage.getItem('token') ? (
+            <Component {...matchProps} />
+          ) : (
+            <Redirect to="/" />
+          )
+        // eslint-disable-next-line react/jsx-curly-newline
       }
     />
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    user_type: state.user.user_type,
-    appState: state.appState
-  };
-};
-
-export default connect(mapStateToProps, {})(PrivateRoute);
+export default connect(state => state)(PrivateRoute);
