@@ -19,7 +19,7 @@ export const login = (credentials, history) => dispatch => {
 	  .then(res =>{
 		dispatch({ type: types.LOGIN });
 		localStorage.setItem("token", res.data.token);
-		history.push(`/home`);
+		history.push(`/AppinfoContainer`);
 	  })
 	  .catch(err => {
 		console.log(err);
@@ -38,7 +38,7 @@ export const logout = history => dispatch => {
 	dispatch({ type:types.LOG_OUT})
 	history.push("/login");
   };
-export const addadverts = () => dispatch => {
+export const getAdverts = () => dispatch => {
 	function handleSubmit(credentials, setCredentials) {
     console.log(credentials, setCredentials)
     credentials.user_id = 1;
