@@ -1,81 +1,191 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import styled from "styled-components";
+// import React, {Component} from 'react';  
 
-const UserAdvert = props => {
-        return (
-            <Link to={`/UserDashboard`}>
-              <div className="item-card-container">
-              <StyledForm className="styled-card">
-              <h4>{props.item.advertName}</h4>
-          <h4>{props.advert.websiteUrl}</h4>
-          <h4>{props.advert.country}</h4>
-          <h4>{props.advert.tags}</h4>
-          <h4>{props.advert.date}</h4>
-          <h4>{props.advert.dateString}</h4>
-          <h4>{props.advert.days}</h4>
-        </StyledForm>
-        </div>
-    </Link>
-  );
-};
+// /* Import Components */
+// import CheckBox from '../components/CheckBox';  
+// import Input from '../components/Input';  
+// import TextArea from '../components/TextArea';  
+// import Select from '../components/Select';
+// import Button from '../components/Button'
 
-const mapStateToProps = state => {
-    return {
-      };
-    };
-    export default connect(mapStateToProps)(
-        UserAdvert
-      );
-  const StyledForm = styled.div`
-  border: 1px solid black;
-  box-shadow: 0px 0px 22px -1px rgba(87, 81, 87, 0.65);
-  background-color:#CFDEF3;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  align-self: flex-start;
-  max-width: 350px;
-  margin: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 5px 1px 20px grey;
-  font-size: 1.1rem;
-  transition: 0.5s;
-  color: black;
-  img {
-    width: 100%;
-  }
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-const StyledButton = styled.button`
-  padding: 8px 8px;
-  background-color: #2da561;
-  color: #fff;
-  width: 30%;
-  border: 1px solid #2da561;
-  padding: 0.6rem;
-  line-height: 1;
-  background-color: 250ms;
-  margin: 30 40 40 0;
-  border-radius: 2px;
-  font-size: 1rem;
-  display: flex-box;
-  justify-content: space-between;
-  @media screen and (max-width: 500px) {
-    text-align: center;
-    margin: 0 auto;
-    font-size: 1.5rem;
-  }
-  :hover {
-    cursor: pointer;
-    background-color: white;
-    color: #2da562;
-    border: 1px solid #2da562;
-  }`
+// class FormContainer extends Component {  
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       newUser: {
+//         name: '',
+//         age: '',
+//         gender: '',
+//         skills: [],
+//         about: ''
+
+//       },
+
+//       genderOptions: ['Male', 'Female', 'Others'],
+//       skillOptions: ['Programming', 'Development', 'Design', 'Testing']
+
+//     }
+//     this.handleTextArea = this.handleTextArea.bind(this);
+//     this.handleAge = this.handleAge.bind(this);
+//     this.handleFullName = this.handleFullName.bind(this);
+//     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+//     this.handleClearForm = this.handleClearForm.bind(this);
+//     this.handleCheckBox = this.handleCheckBox.bind(this);
+//     this.handleInput = this.handleInput.bind(this);
+//   }
+
+//   /* This lifecycle hook gets executed when the component mounts */
+  
+//   handleFullName(e) {
+//    let value = e.target.value;
+//    this.setState( prevState => ({ newUser : 
+//         {...prevState.newUser, name: value
+//         }
+//       }), () => console.log(this.state.newUser))
+//   }
+
+//   handleAge(e) {
+//        let value = e.target.value;
+//    this.setState( prevState => ({ newUser : 
+//         {...prevState.newUser, age: value
+//         }
+//       }), () => console.log(this.state.newUser))
+//   }
+
+//   handleInput(e) {
+//        let value = e.target.value;
+//        let name = e.target.name;
+//    this.setState( prevState => ({ newUser : 
+//         {...prevState.newUser, [name]: value
+//         }
+//       }), () => console.log(this.state.newUser))
+//   }
+
+//   handleTextArea(e) {
+//     console.log("Inside handleTextArea");
+//     let value = e.target.value;
+//     this.setState(prevState => ({
+//       newUser: {
+//         ...prevState.newUser, about: value
+//       }
+//       }), ()=>console.log(this.state.newUser))
+//   }
+
+
+//   handleCheckBox(e) {
+
+//     const newSelection = e.target.value;
+//     let newSelectionArray;
+
+//     if(this.state.newUser.skills.indexOf(newSelection) > -1) {
+//       newSelectionArray = this.state.newUser.skills.filter(s => s !== newSelection)
+//     } else {
+//       newSelectionArray = [...this.state.newUser.skills, newSelection];
+//     }
+
+//       this.setState( prevState => ({ newUser:
+//         {...prevState.newUser, skills: newSelectionArray }
+//       })
+//       )
+// }
+
+//   handleFormSubmit(e) {
+//     e.preventDefault();
+//     let userData = this.state.newUser;
+
+//     fetch('http://example.com',{
+//         method: "POST",
+//         body: JSON.stringify(userData),
+//         headers: {
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//         },
+//       }).then(response => {
+//         response.json().then(data =>{
+//           console.log("Successful" + data);
+//         })
+//     })
+//   }   
+
+//   handleClearForm(e) {
+  
+//       e.preventDefault();
+//       this.setState({ 
+//         newUser: {
+//           name: '',
+//           age: '',
+//           gender: '',
+//           skills: [],
+//           about: ''
+//         },
+//       })
+//   }
+
+//   render() {
+//     return (
+    
+//         <form className="container-fluid" onSubmit={this.handleFormSubmit}>
+       
+//             <Input inputType={'text'}
+//                    title= {'Full Name'} 
+//                    name= {'name'}
+//                    value={this.state.newUser.name} 
+//                    placeholder = {'Enter your name'}
+//                    handleChange = {this.handleInput}
+                   
+//                    /> {/* Name of the user */}
+        
+//           <Input inputType={'number'} 
+//                 name={'age'}
+//                  title= {'Age'} 
+//                  value={this.state.newUser.age} 
+//                 placeholder = {'Enter your age'}
+//                  handleChange={this.handleAge} /> {/* Age */} 
+
+
+//           <Select title={'Gender'}
+//                   name={'gender'}
+//                   options = {this.state.genderOptions} 
+//                   value = {this.state.newUser.gender}
+//                   placeholder = {'Select Gender'}
+//                   handleChange = {this.handleInput}
+//                   /> {/* Age Selection */}
+//           <CheckBox  title={'Skills'}
+//                   name={'skills'}
+//                   options={this.state.skillOptions}
+//                   selectedOptions = { this.state.newUser.skills}
+//                   handleChange={this.handleCheckBox}
+//                    /> {/* Skill */}
+//           <TextArea
+//             title={'About you.'}
+//             rows={10}
+//             value={this.state.newUser.about}
+//             name={'currentPetInfo'}
+//             handleChange={this.handleTextArea}
+//             placeholder={'Describe your past experience and skills'} />{/* About you */}
+
+//           <Button 
+//               action = {this.handleFormSubmit}
+//               type = {'primary'} 
+//               title = {'Submit'} 
+//             style={buttonStyle}
+//           /> { /*Submit */ }
+          
+//           <Button 
+//             action = {this.handleClearForm}
+//             type = {'secondary'}
+//             title = {'Clear'}
+//             style={buttonStyle}
+//           /> {/* Clear the form */}
+          
+//         </form>
+  
+//     );
+//   }
+// }
+
+// const buttonStyle = {
+//   margin : '10px 10px 10px 10px'
+// }
+
+// export default FormContainer;

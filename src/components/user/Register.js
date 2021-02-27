@@ -1,11 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import {useHistory} from "react-router-dom"
+import { useHistory, withRouter} from "react-router-dom"
 import {axiosWithAuth} from "../../utils/axios"
 import styled from "styled-components";
-import * as actionCreators from "../../state/actionCreators"
-import {connect} from "react-redux"
 // import AboutPage from './AboutPage';
 import {
   tabletPortrait,
@@ -55,19 +53,11 @@ const RegForm = styled.div`
 
 export function Register(props) {
     const history = useHistory();
-
-    const initialState = {
-        email: "",
-        password: "",
-        first_name: "",
-        last_name: "",
-      
-      }
-      function handleSubmit(values, actions) {
+    function handleSubmit(values, actions) {
         console.log(values);
         axiosWithAuth()
           .post(
-            "api/auth/register",
+            `${process.env.REACT_APP_BACKEND_URL}/api/auth/register`,
             values)
             
           .then(response => {
@@ -164,20 +154,17 @@ export function Register(props) {
     </Formik>
   );
 }
+const validationSchema =Yup.object().shape({
+    first_name:  Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter your  first name"),
+    last_name:  Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter your last name"),
+    email:  Yup.string().email('Invalid email').required("Please enter your email"),
+    password: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter password"),
+})
 
-
-
-    const validationSchema =Yup.object().shape({
-            first_name:  Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter your  first name"),
-            last_name:  Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter your last name"),
-            email:  Yup.string().email('Invalid email').required("Please enter your email"),
-            password: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter password"),
-        })
-
-        function mapStateToProps(state) {
-          return {
-            formValues: state.formValues
-    };
-  }
-
-export default connect(mapStateToProps, actionCreators)(Register);
+const initialState = {
+  email: "",
+  password: "",
+  first_name: "",
+  last_name: "",
+}
+export default withRouter(Register);

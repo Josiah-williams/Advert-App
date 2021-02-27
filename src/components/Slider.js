@@ -62,8 +62,8 @@ const Click = styled.div`
     width:127px;
     height:50px;
     position absolute;
-    top:239px;
-    left:106px;
+    top:147px;
+    left:114px;
     border: 1px solid darkslategray;
 
   }

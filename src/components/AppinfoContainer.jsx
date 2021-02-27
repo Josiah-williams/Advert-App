@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import app from "../images/app.svg";
 import advert from "../images/advert.svg";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components"
 import {
   tabletPortrait,
@@ -120,6 +119,7 @@ export default function AppinfoContainer() {
   const Logout = e => {
     localStorage.removeItem("token");
     history.push("/login");
+  }
   return (
     <div className="signup">
        <Link2Link>
@@ -130,14 +130,14 @@ export default function AppinfoContainer() {
          
           <ul className="right-navbar">
             <li>
-              <NavLink className="nav--link" to="/UserDashboard" replace>
+              <Link className="nav--link" to="/Dashboard" replace>
                 Dashboard
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink className="nav--links" onClick={Logout}>
+              <Link className="nav--links" onClick={Logout}>
                 Log Out
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -171,4 +171,4 @@ export default function AppinfoContainer() {
     </div>
   );
 }
-}
+

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import {login} from  "../../state/actionCreators";
 import {Formik, Form, Field, ErrorMessage} from 'formik';
-import { connect } from "react-redux";
 import * as Yup from 'yup';
 import Styled from 'styled-components';
-import { Switch, Route, Link, useHistory } from "react-router-dom";
+import {axiosWithAuth} from "../../utils/axios"
+import { Switch, Route, Link, useHistory,withRouter } from "react-router-dom";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -42,25 +41,28 @@ const FormDiv =Styled.div`
 
 `;
 
-export function Login({ login }) {
-    const [type, setType] = useState(true);
-  
+export function Login(props) {
     const history = useHistory();
-  
-    const initialState = {
-      username: "",
-      password: ""
-    };
-  
-    const validationSchema = Yup.object().shape({
-      username: Yup.string().required("please enter your name"),
-      password: Yup.string().required("please enter a password")
-    });
-  
+    
     function handleSubmit(values, actions) {
-      login(values, history);
-    }
-  
+      console.log(values);
+      axiosWithAuth()
+         .post(
+           `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, 
+           credentials)
+        .then(res =>{
+        localStorage.setItem("token", res.data.token);
+        actions.resetForm();
+        history.push(`/AppinfoContainer`);
+        })
+        .catch(err => {
+        console.log(err);
+        })
+        .finally(() => {
+          console.log("login sucessful")
+        });
+      };
+    
     function handleType() {
       setType(!type);
     }
@@ -105,7 +107,15 @@ export function Login({ login }) {
       
     );
   }
-  
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required("please enter your name"),
+    password: Yup.string().required("please enter a password")
+  });
+
+  const initialState = {
+    username: "",
+    password: ""
+  };
 
 
-export default connect(state => state, { login })(Login);
+export default withRouter(Login);

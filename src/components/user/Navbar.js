@@ -131,7 +131,6 @@ width: 100%;
       @media ${mobilePortrait} {
         z-index: 1;
         padding-top: 10px;
-        margin-top:40px
       }
     }
     }

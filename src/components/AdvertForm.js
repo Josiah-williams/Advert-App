@@ -1,12 +1,11 @@
-import React, {Component} from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React, {Component,useState,useContext} from "react";
+import { NavLink, useHistory,withRouter } from "react-router-dom";
 import styled from "styled-components";
+import axiosWithAuth from "../utils/axios"
 import Examples from "./Countries"
 import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
 import DayIncrement from "../components/user/Date";
-import {getAdverts} from  "../state/actionCreators";
-import {connect} from "react-redux"
 import '../styles.css';
 import {
   tabletPortrait,
@@ -127,6 +126,7 @@ class AdvertForm extends Component {
     super(props)
     let today = new Date();
     this.state = {
+      adverts: {
       clicks: 0,
       show: true,
       advertName: '',
@@ -136,17 +136,42 @@ class AdvertForm extends Component {
       days: '',
       date: '',
       dateString: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
-    };
-  }
-  handleOnchange = (e) => {
-    this.setState({[e.target.name]:e.target.value})
-
-  }
-  handleSubmit(event) {
-    event.preventDefault();
+    }
   }
 
+  this.handleChange = this.handleChange.bind(this);
+  this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  this.handleDatepickerChange = this.handleDatepickerChange.bind(this);
+  }
+  
+  handleChange = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+  this.setState( prevState => ({ adverts :
+  {...prevState.adverts, [name]: value
+}
+}), ()=>console.log(this.state.adverts))
+}
 
+  handleFormSubmit(e) {
+    e.preventDefault();
+  
+    axiosWithAuth()
+    .post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/adverts/add`
+    )
+    .then(res => {
+      debugger;
+      console.log(res);
+      props.history.push("/UserDashboard");
+    })
+    .catch(e => console.log(e))
+    .finally(() => {
+      console.log("Axios request finished.");
+    });
+  }
+
+ 
   handleDatepickerChange = event => {
     const elementRef = document.querySelector('.date-display')
     elementRef.textContent = event.target.value
@@ -181,11 +206,11 @@ class AdvertForm extends Component {
   }
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
-  }
+  };
   render() {
     const Logout = e => {
       localStorage.removeItem("token");
-    }
+    };
     const selectedTags = tags => console.log(tags);
   return (
       <div className="nav">
@@ -197,7 +222,7 @@ class AdvertForm extends Component {
          
           <ul className="right-navbar">
             <li>
-              <NavLink className="nav--link" to="/UserDashboard" replace>
+              <NavLink className="nav--link" to="/Dashboard" replace>
                 Dashboard
               </NavLink>
             </li>
@@ -220,9 +245,9 @@ class AdvertForm extends Component {
               required
               type="text" 
               id="Advert name" 
-              name="advertName" 
-              value= {this.state.advertName}
-              onChange= {this.handleOnchange}
+              name= {"advertName"} 
+              value= {this.state.adverts.advertName}
+              onChange= {this.handleChange}
               className="form--input" 
               />
               <span className="input--label">Advert name</span>
@@ -233,8 +258,8 @@ class AdvertForm extends Component {
               type="text" 
               id="website url" 
               name="websiteUrl" 
-              value= {this.state.websiteUrl}
-              onChange= {this.handleOnchange}
+              value= {this.state.adverts.websiteUrl}
+              onChange= {this.handleChange}
               className="form--input"
               />
               <span className="input--label">Website Url</span>
@@ -243,14 +268,14 @@ class AdvertForm extends Component {
               <Examples
                 id="country"
                 name="country"
-                value= {this.state.country}
+                value= {this.state.adverts.country}
                 className="form--input"
               />
               <label htmlFor="tags">tags</label>
               <TagsInput selectedTags={selectedTags}
                 id="tags"
                name="tags"
-               value= {this.state.tags}
+               value= {this.state.adverts.tags}
               />
                 <Label htmlFor="Duration">Choose when this ad will end</Label>
                 <Div>
@@ -258,15 +283,15 @@ class AdvertForm extends Component {
             }
               <DayIncrement IncrementItem={this.IncrementItem} 
               DecreaseItem={this.DecreaseItem} 
-              clicks={this.state.clicks} show={this.state.show} 
+              clicks={this.state.adverts.clicks} show={this.state.adverts.show} 
               name="date"
-              value= {this.state.date}
+              value= {this.state.adverts.date}
               />
                 {
             }
-              <Calender dateString={this.state.dateString} datePickerHandler={this.handleDatepickerChange} 
+              <Calender dateString={this.state.adverts.dateString} datePickerHandler={this.handleDatepickerChange} 
               name="calender"
-              value= {this.state.dateString} 
+              value= {this.state.adverts.dateString} 
               />
               </Div>
               <label className="form--label">
@@ -274,14 +299,14 @@ class AdvertForm extends Component {
               required
               type="text" 
               id="days"
-              value= {this.state.days}
-              onChange= {this.handleOnchange}
+              value= {this.state.adverts.days}
+              onChange= {this.handleChange}
               name="days" 
               className="form--input"
               />
               <span className="input--label">How many to run per day</span>
                </label>
-               <button className="button-primary button-big" id="button" type="submit" onClick={() => history.push("/payment")}>
+               <button className= "button-primary button-big" id= "button" type= "submit" onClick={() => history.push("/payment")}>
             Submit
           </button>
             
@@ -290,16 +315,10 @@ class AdvertForm extends Component {
       </div>
     </StyledAdd>
     </div>
-    )
-
-}
+  )}
 }
 
-const mapStateToProps = (state) => {
-  return {
-    dashboard: state.dashboard
-  }
-}
+
 
 const Div = styled.div `
   width: 101%;
@@ -423,4 +442,4 @@ const StyledAdd = styled.div`
     }
 }
  `;   
-export default connect(mapStateToProps, { getAdverts }) (AdvertForm);
+export default withRouter(AdvertForm);

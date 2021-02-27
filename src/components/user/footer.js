@@ -68,7 +68,7 @@ const StyledDiv = styled.div`
       width: 104vw;
       background-color: #528E6F;
       color: white;
-      bottom: 39px;
+      bottom: 128px;
       height: 267px;
       display: flex;
       align-items: center;

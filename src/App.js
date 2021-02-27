@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, Link, NavLink, useHistory } from "react-router-dom";
-import { connect } from "react-redux";
-import {  logout, } from "./state/actionCreators";
+import { Switch, Route, Link, NavLink, useHistory,withRouter } from "react-router-dom";
 import Login from "./components/user/Login"
 import Register from "./components/user/Register"
 import "./CSS/App.css"
@@ -88,8 +86,8 @@ const Logo = styled.div`
   left:1px;
   @media ${mobilePortrait} {
     z-index: 1;
-    padding-top: 33px;
-    height: 87px;
+    padding-top: 10px;
+    height: 56px;
     width: 79px;
     .img {
       position: sticky;
@@ -98,4 +96,4 @@ const Logo = styled.div`
   }
 }
 `;
-export default connect(mapStateToProps, { logout })(App);
+export default withRouter(App);

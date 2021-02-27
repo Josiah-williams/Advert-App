@@ -1,6 +1,6 @@
 import React from "react";
 import money from "../images/money.svg";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import {
   tabletPortrait,
@@ -118,9 +118,10 @@ export default function payment() {
   const Logout = e => {
     localStorage.removeItem("token");
     history.push("/login");
+  }
   return (
     <div className="signup">
-             <Link2Link>
+        <Link2Link>
         <header className="navbar-container">
         <nav>
           <div className="logo-div">
@@ -128,14 +129,14 @@ export default function payment() {
          
           <ul className="right-navbar">
             <li>
-              <NavLink className="nav--link" to="/UserDashboard" replace>
+              <Link className="nav--link" to="/Dashboard" replace>
                 Dashboard
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink className="nav--links" onClick={Logout}>
+              <Link className="nav--links" onClick={Logout}>
                 Log Out
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -169,4 +170,4 @@ export default function payment() {
       </div>
     </div>
   );
-}}
+}
