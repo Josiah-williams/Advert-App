@@ -13,4 +13,4 @@ export const axiosWithAuth =()=> {
 
   return instance;
 }
-export default axios
+export default axiosWithAuth

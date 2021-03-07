@@ -2,7 +2,8 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import { useHistory, withRouter} from "react-router-dom"
-import {axiosWithAuth} from "../../utils/axios"
+// import {axiosWithAuth} from "../../utils/axios"
+import axios from "axios"
 import styled from "styled-components";
 // import AboutPage from './AboutPage';
 import {
@@ -55,10 +56,11 @@ export function Register(props) {
     const history = useHistory();
     function handleSubmit(values, actions) {
         console.log(values);
-        axiosWithAuth()
+        axios
           .post(
-            `${process.env.REACT_APP_BACKEND_URL}/api/auth/register`,
-            values)
+            `/api/auth/register`,
+            values, {headers:{"Content-Type": "application/json"}}
+            )
             
           .then(response => {
             history.push("/login");
@@ -131,21 +133,6 @@ export function Register(props) {
           <span className="input--label">Password</span>
           <ErrorMessage name="password" component="div" className="error" />
         </label>
-        <label className="form--label">
-          <Field
-            required
-            type="password"
-            id="repeat_password"
-            name="repeat_password"
-            className="form--input"
-          />
-          <span className="input--label">Repeat password</span>
-          <ErrorMessage
-            name="repeat_password"
-            component="div"
-            className="error"
-          />
-        </label>
         <button type="submit" className="button-primary button-big">
           Continue
         </button>
@@ -162,9 +149,9 @@ const validationSchema =Yup.object().shape({
 })
 
 const initialState = {
-  email: "",
-  password: "",
   first_name: "",
   last_name: "",
+  email: "",
+  password:"",
 }
 export default withRouter(Register);

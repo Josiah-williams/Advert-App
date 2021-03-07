@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import Styled from 'styled-components';
-import {axiosWithAuth} from "../../utils/axios"
+// import {axiosWithAuth} from "../../utils/axios"
+import axios from 'axios'
 import { Switch, Route, Link, useHistory,withRouter } from "react-router-dom";
 import {
   tabletPortrait,
@@ -46,14 +47,14 @@ export function Login(props) {
     
     function handleSubmit(values, actions) {
       console.log(values);
-      axiosWithAuth()
+      axios
          .post(
-           `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, 
-           credentials)
+           `/api/auth/login`, values, {headers:{"Content-Type": "application/json"}}
+        )
         .then(res =>{
         localStorage.setItem("token", res.data.token);
         actions.resetForm();
-        history.push(`/AppinfoContainer`);
+        history.push(`/info`);
         })
         .catch(err => {
         console.log(err);
@@ -108,12 +109,12 @@ export function Login(props) {
     );
   }
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("please enter your name"),
+    email: Yup.string().required("please enter your email"),
     password: Yup.string().required("please enter a password")
   });
 
   const initialState = {
-    username: "",
+    email: "",
     password: ""
   };
 

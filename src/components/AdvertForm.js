@@ -1,7 +1,7 @@
-import React, {Component,useState,useContext} from "react";
+import React, {Component, useContext} from "react";
 import { NavLink, useHistory,withRouter } from "react-router-dom";
 import styled from "styled-components";
-import axiosWithAuth from "../utils/axios"
+import {axiosWithAuth} from "../utils/axios"
 import Examples from "./Countries"
 import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
