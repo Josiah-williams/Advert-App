@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import { useHistory, withRouter} from "react-router-dom"
-// import {axiosWithAuth} from "../../utils/axios"
-import axios from "axios"
+import axiosWithAuth from "../../utils/axios"
+// import axios from "axios"
 import styled from "styled-components";
 // import AboutPage from './AboutPage';
 import {
@@ -54,12 +54,18 @@ const RegForm = styled.div`
 
 export function Register(props) {
     const history = useHistory();
-    function handleSubmit(values, actions) {
+    function handleSubmit(values, tools) {
+      const payload = {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        email: values.email,
+        password: values.password,
+      };
         console.log(values);
-        axios
+        axiosWithAuth()
           .post(
             `/api/auth/register`,
-            values, {headers:{"Content-Type": "application/json"}}
+            payload, 
             )
             
           .then(response => {
@@ -133,7 +139,7 @@ export function Register(props) {
           <span className="input--label">Password</span>
           <ErrorMessage name="password" component="div" className="error" />
         </label>
-        <button type="submit" className="button-primary button-big">
+        <button onClick={handleSubmit} type="submit" className="button-primary button-big">
           Continue
         </button>
       </Form>
@@ -152,6 +158,6 @@ const initialState = {
   first_name: "",
   last_name: "",
   email: "",
-  password:"",
+  password: "",
 }
 export default withRouter(Register);
