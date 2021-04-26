@@ -1,5 +1,5 @@
 import React, {Component, useContext} from "react";
-import { NavLink, useHistory,withRouter } from "react-router-dom";
+import { NavLink,Link, useHistory,withRouter } from "react-router-dom";
 import styled from "styled-components";
 import {axiosWithAuth} from "../utils/axios"
 import Examples from "./Countries"
@@ -37,8 +37,8 @@ width: 100%;
       
       @media ${mobilePortrait} {
         z-index: 1;
-        padding-top: 10px;
-        margin-top:31px
+        margin-top:-13px;
+        padding-right:0px
       }
     }
     }
@@ -126,44 +126,42 @@ class AdvertForm extends Component {
     super(props)
     let today = new Date();
     this.state = {
-      adverts: {
-      clicks: 0,
+      addAdverts : {
+      days: 0,
       show: true,
       advertName: '',
       websiteUrl: '',
       country: '',
       tags: '',
-      days: '',
-      date: '',
+      number: '',
       dateString: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
-    }
   }
+}
 
   this.handleChange = this.handleChange.bind(this);
   this.handleFormSubmit = this.handleFormSubmit.bind(this);
   this.handleDatepickerChange = this.handleDatepickerChange.bind(this);
   }
   
+  // history = useHistory()
   handleChange = (e) => {
     let value = e.target.value;
     let name = e.target.name;
-  this.setState( prevState => ({ adverts :
-  {...prevState.adverts, [name]: value
-}
-}), ()=>console.log(this.state.adverts))
+  this.setState( { [name]: value
+  }
+, ()=>console.log(this.state))
 }
 
-  handleFormSubmit(e) {
+  handleFormSubmit(credentials, setCredentials) {
     e.preventDefault();
   
     axiosWithAuth()
     .post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/adverts/add`
+      `/api/adverts/add`, credentials, {headers:{"Content-Type": "application/json"}}
     )
     .then(res => {
-      debugger;
+      setCredentials.resetForm();
       console.log(res);
-      props.history.push("/UserDashboard");
     })
     .catch(e => console.log(e))
     .finally(() => {
@@ -179,12 +177,12 @@ class AdvertForm extends Component {
     const today = new Date()
 
     let numberOfDays = Math.round((selectedDate - today) / (1000 * 3600 * 24))
-    this.setState({ clicks: numberOfDays })
+    this.setState({ days: numberOfDays })
   }
 
-  changeDate = clicks => {
+  changeDate = days => {
     const today = new Date()
-    const newDateInMilliseconds = (clicks * 1000 * 3600 * 24) + today.getTime()
+    const newDateInMilliseconds = (days * 1000 * 3600 * 24) + today.getTime()
     const newDate = new Date(newDateInMilliseconds)
     const newDay = newDate.getDate()
     const newMonth = newDate.getMonth()
@@ -194,16 +192,23 @@ class AdvertForm extends Component {
   }
 
   IncrementItem = () => {
-    this.setState(state => {
-      return { clicks: state.clicks + 1 }
-    }, () => this.changeDate(this.state.clicks))
+    this.setState ({
+      addAdverts : {
+        ...this.state.addAdverts,
+        days:addAdverts.days + 1 }
+    }, () => this.changeDate(this.state.addAdverts.days))
+  
   }
 
   DecreaseItem = () => {
-    this.setState(state => {
-      return { clicks: state.clicks - 1 }
-    }, () => this.changeDate(this.state.clicks))
+    this.setState(prevState => ({
+        addAdverts : {
+         ...prevState.addAdverts,
+         days : prevState.addAdverts.days - 1 }
+    }, () => this.changeDate(this.state.days))
+  )
   }
+
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
   };
@@ -245,8 +250,8 @@ class AdvertForm extends Component {
               required
               type="text" 
               id="Advert name" 
-              name= {"advertName"} 
-              value= {this.state.adverts.advertName}
+              name= "advertName"
+              value= {this.state.advertName}
               onChange= {this.handleChange}
               className="form--input" 
               />
@@ -258,24 +263,30 @@ class AdvertForm extends Component {
               type="text" 
               id="website url" 
               name="websiteUrl" 
-              value= {this.state.adverts.websiteUrl}
+              value= {this.state.websiteUrl}
               onChange= {this.handleChange}
               className="form--input"
               />
               <span className="input--label">Website Url</span>
               </label>
-              <label htmlFor="country">Country</label>
-              <Examples
-                id="country"
-                name="country"
-                value= {this.state.adverts.country}
-                className="form--input"
+              <label className="form--label">
+              <input
+              required
+              type="text"
+              id="country"
+              name= "country"
+              value= {this.state.country}
+              onChange= {this.handleChange}
+              className="form--input"
               />
+              <span className="input--label">Country</span>
+              </label>
               <label htmlFor="tags">tags</label>
               <TagsInput selectedTags={selectedTags}
+              type="text"
                 id="tags"
                name="tags"
-               value= {this.state.adverts.tags}
+               value= {this.state.tags}
               />
                 <Label htmlFor="Duration">Choose when this ad will end</Label>
                 <Div>
@@ -283,33 +294,37 @@ class AdvertForm extends Component {
             }
               <DayIncrement IncrementItem={this.IncrementItem} 
               DecreaseItem={this.DecreaseItem} 
-              clicks={this.state.adverts.clicks} show={this.state.adverts.show} 
-              name="date"
-              value= {this.state.adverts.date}
+              days={this.state.addAdverts.days} show={this.state.addAdverts.show} 
+              name= "days"
+              // value= {this.state.addAdverts.days}
+              onChange={this.handleChange}
               />
                 {
             }
-              <Calender dateString={this.state.adverts.dateString} datePickerHandler={this.handleDatepickerChange} 
-              name="calender"
-              value= {this.state.adverts.dateString} 
+              <Calender dateString={this.state.addAdverts.dateString} datePickerHandler={this.handleDatepickerChange} 
+              name="datestring"
+              value= {this.state.value} 
+              onChange={this.handleChange}
               />
               </Div>
               <label className="form--label">
               <input 
               required
               type="text" 
-              id="days"
-              value= {this.state.adverts.days}
+              id="number"
+              value= {this.state.number}
               onChange= {this.handleChange}
-              name="days" 
+              name="number" 
               className="form--input"
               />
               <span className="input--label">How many to run per day</span>
                </label>
-               <button className= "button-primary button-big" id= "button" type= "submit" onClick={() => history.push("/payment")}>
+               <Link to="/payment">
+               <button className= "button-primary button-big" id= "button" type= "submit">
             Submit
-          </button>
-            
+            </button>
+          </Link>
+          
             </form>
             </>
       </div>
@@ -425,7 +440,7 @@ const StyledAdd = styled.div`
     }
   @media ${mobilePortrait} {
     position:absolute;  
-    top:59%;
+    top:54%;
     left: 48%;
     width:382px;
     height:595px;

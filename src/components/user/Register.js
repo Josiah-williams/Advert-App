@@ -54,21 +54,16 @@ const RegForm = styled.div`
 
 export function Register(props) {
     const history = useHistory();
-    function handleSubmit(values, tools) {
-      const payload = {
-        first_name: values.first_name,
-        last_name: values.last_name,
-        email: values.email,
-        password: values.password,
-      };
-        console.log(values);
+    function handleSubmit(values, actions) {
+      console.log(values)
         axiosWithAuth()
           .post(
             `/api/auth/register`,
-            payload, 
+            values, {headers:{"Content-Type": "application/json"}}
             )
             
           .then(response => {
+            localStorage.setItem("token", response.data.token);
             history.push("/login");
     
             console.log(response.data);
@@ -81,71 +76,77 @@ export function Register(props) {
           });
       }
     
-    
     return (
       <Formik
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
-      initialValues={initialState}
-    >
-      <RegForm>
-      <Form className="form-container">
-        <h1 className="card--title">Greenhood adv sign up</h1>
-        <label className="form--label">
-          <Field
-            required
-            type="text"
-            id="firstname"
-            name="firstname"
-            className="form--input"
-          />{" "}
-          <span className="input--label">First name</span>
-          <ErrorMessage name="first name" component="div" className="error" />
-        </label>
-        <label className="form--label">
-          <Field
-            required
-            type="text"
-            id="lastname"
-            name="last name"
-            className="form--input"
-          />
-          <span className="input--label">Last name</span>
-          <ErrorMessage name="lastname" component="div" className="error" />
-        </label>
-        <label className="form--label">
-          <Field
-            required
-            type="text"
-            id="email"
-            name="email"
-            className="form--input"
-          />
-          <span className="input--label">email</span>
-          <ErrorMessage
-            name="email"
-            component="div"
-            className="error"
-          />
-        </label>
-        <label className="form--label">
-          <Field
-            required
-            type="password"
-            id="password"
-            name="password"
-            className="form--input"
-          />
-          <span className="input--label">Password</span>
-          <ErrorMessage name="password" component="div" className="error" />
-        </label>
-        <button onClick={handleSubmit} type="submit" className="button-primary button-big">
-          Continue
-        </button>
-      </Form>
-      </RegForm>
-    </Formik>
-  );
+      initialValues={initialState}>
+      {({handleSubmit, values}) => (
+            <RegForm>
+            <Form className="form-container">
+              <h1 className="card--title">Greenhood adv sign up</h1>
+              <label className="form--label">
+                <Field
+                  required
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  className="form--input"
+                  values={values.first_name}
+                />
+                <span className="input--label">First name</span>
+                <ErrorMessage name="first name" component="div" className="error" />
+              </label>
+              <label className="form--label">
+                <Field
+                  required
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  className="form--input"
+                  values={values.last_name}
+                />
+                <span className="input--label">Last name</span>
+                <ErrorMessage name="lastname" component="div" className="error" />
+              </label>
+              <label className="form--label">
+                <Field
+                  required
+                  type="text"
+                  id="email"
+                  name="email"
+                  className="form--input"
+                  values={values.email}
+                />
+                <span className="input--label">email</span>
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="error"
+                />
+              </label>
+              <label className="form--label">
+                <Field
+                  required
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="form--input"
+                  values={values.password}
+                />
+                <span className="input--label">Password</span>
+                <ErrorMessage name="password" component="div" className="error" />
+              </label>
+              <button onClick={handleSubmit} type="submit" className="button-primary button-big">
+                Continue
+              </button>
+            </Form>
+            </RegForm>
+            )       
+    }
+  
+  </Formik>
+    );
 }
 const validationSchema =Yup.object().shape({
     first_name:  Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required("Please enter your  first name"),
@@ -155,9 +156,9 @@ const validationSchema =Yup.object().shape({
 })
 
 const initialState = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: '',
 }
 export default withRouter(Register);

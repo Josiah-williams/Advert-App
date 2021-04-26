@@ -38,6 +38,7 @@ const animateSlide = () => {
   
       handleSlide(slideCounter)
       slideCounter--;
+      
     }
   
   const goToNextSlide = () => {

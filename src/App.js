@@ -6,9 +6,10 @@ import "./CSS/App.css"
 import styled from "styled-components"
 import Promotion from "./components/AdvertForm"
 import Images from './components/images'
-import Slider from './components/Slider'
+import CarouselContainer from './components/Slider'
 import AppForm from './components/AppForm'
 import UserDashboard from './components/UserDashboard'
+import NotFoundPage from './components/NotFoundPage';
 import {
   tabletPortrait,
   tabletLandscape,
@@ -40,7 +41,7 @@ function App({ appState, user, checkToken, logout }) {
           </Logo>
     <Switch>
     <Route exact path="/">
-    <Slider images={Images}/>
+    <CarouselContainer/>
           </Route>
       <Route exact path="/login">
         <Login />
@@ -62,6 +63,7 @@ function App({ appState, user, checkToken, logout }) {
               </Route>
               <Route exact path="/Dashboard">
               <UserDashboard />
+              <Route component={NotFoundPage} />
             </Route>
 
 
@@ -80,15 +82,16 @@ function mapStateToProps(state) {
 const Logo = styled.div`
 .logo {
   z-index: 1;
-  padding-top: 10px;
+  padding-top: 37px;
   position: absolute;
-  top: -9px;
+  top: -30px;
   left:1px;
+  height:101px;
   @media ${mobilePortrait} {
     z-index: 1;
-    padding-top: 10px;
-    height: 56px;
-    width: 79px;
+    padding-top: 17px;
+    height: 77px;
+    width: 89px;
     .img {
       position: sticky;
       top: 0;

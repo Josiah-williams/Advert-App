@@ -1,5 +1,5 @@
 import React from "react";
-import { axiosWithAuth } from "./src/utils/axios";
+import { axiosWithAuth } from "../utils/axios";
 import { withRouter } from "react-router-dom";
 import UserDashboard from "./UserDashboard"
 
@@ -45,7 +45,7 @@ class advertList extends React.Component {
 
     componentDidUpdate(prevState){
         axiosWithAuth()
-        .get(`${process.env.REACT_APP_BACKEND_URL}/api/adverts`)
+        .get(`/api/adverts/`)
       .then(resp => {
         this.setadverts(resp.data);
       });
@@ -74,7 +74,7 @@ class advertList extends React.Component {
       axiosWithAuth()
       .put(
         `${process.env.REACT_APP_BACKEND_URL}/api/adverts/update/${id}`,
-        itemsUpdate
+        advertsUpdate
       )
 
       .then(resp => {
@@ -87,6 +87,7 @@ class advertList extends React.Component {
 
 
   handleChange = e => {
+    let value = e.target.value;
       setadvertsUpdate({ ...advertsUpdate, [e.target.name]: e.target.value });
   };
 

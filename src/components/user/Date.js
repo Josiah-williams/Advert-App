@@ -21,7 +21,7 @@ const DayIncrement = props => {
        { this.state.show ? 'Hide number' : 'Show number' }
       </button> */
     }
-        {props.show ? <H2>{props.clicks}</H2> : ''}
+        {props.show ? <H2>{props.days}</H2> : ''}
       </div>;
 };
 
@@ -31,32 +31,35 @@ const Button1 = styled.div`
   gap:16px;
   position: absolute;
   right:243px;
-  top:420px;
+  top:448px;
   font-size: 20px;
 
   @media ${mobilePortrait}{
     position: absolute;
     right:227px;
     font-size: 27px;
+    top: 443px;
   }
 `
 const H2 = styled.div`
   position:absolute;
   left:40px;  
-  top:423px;
+  top:454px;
+  font-weight: bold;
 `
 const Button2 = styled.div`
 display: flex;
 flex-direction: row;
 position: absolute;
 right:272px;
-top:420px;
+top:448px;
 font-size: 20px;
 
 @media ${mobilePortrait}{
   position: absolute;
   right:259px;
   font-size: 27px;
+  top:442px
 }
 `
 export default DayIncrement;

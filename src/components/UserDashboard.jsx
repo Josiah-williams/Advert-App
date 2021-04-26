@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useContext} from "react";
-import UserAdvert from "./user/UserAdvert";
+import advertList from "./advertList";
 import styled from "styled-components";
-import { userContext } from "../context/userContext"
+import { userContext }  from "../context/userContext"
 import {
   tabletPortrait,
   tabletLandscape,
@@ -21,8 +21,8 @@ export default function UserDashboard() {
   if (!adverts) { return null }
   return (
   <div>
-    
-    {adverts.map(advert => {
+
+  {adverts.map(advert => {
         return (
           <div key={advert.id}>
           <h2>your adverts</h2> 
@@ -32,7 +32,7 @@ export default function UserDashboard() {
           <h4>{advert.tags}</h4>
           <h4>{advert.date}</h4>
           <h4>{advert.dateString}</h4>
-          <h4>{advert.days}</h4>
+          <h4>{advert.days}</h4>          
           <div>
             <button onClick={() => useContext.updateAdvert(advert)}>
               Update
@@ -94,25 +94,25 @@ export default function UserDashboard() {
             }
               <DayIncrement IncrementItem={context.IncrementItem} 
               DecreaseItem={context.DecreaseItem} 
-              clicks={context.updateAdvert.clicks} show={context.updateAdvert.show} 
-              name="date"
-              value= {context.updateAdvert.date}
+              days={context.updateAdvert.days} show={context.updateAdvert.show} 
+              name="days"
+              value= {context.updateAdvert.value}
               />
                 {
             }
               <Calender dateString={context.updateAdvert.dateString} datePickerHandler={context.handleDatepickerChange} 
               name="calender"
-              value= {context.updateAdvert.dateString} 
+              value= {context.updateAdvert.value} 
               />
               </Div>
               <label className="form--label">
               <input 
               required
               type="text" 
-              id="days"
-              value= {context.updateAdvert.days}
+              id="number"
+              value= {context.updateAdvert.number}
               onChange= {context.handleChange}
-              name="days" 
+              name="number" 
               className="form--input"
               />
               <span className="input--label">How many to run per day</span>
@@ -130,11 +130,12 @@ export default function UserDashboard() {
               <div></div>
             )}
          </div>
-  )
- })}
-    </div>
+)
+            })}
+            </div>
   )
 }
+  
 
 const Div = styled.div `
   width: 101%;
