@@ -20,7 +20,7 @@ const Click = styled.div`
   width:510px;
   height:67px;
   position:absolute;
-  top:382px;
+  top:412px;
   left:427px;
   background-color: darkslategray;
   color:white;
