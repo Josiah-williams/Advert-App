@@ -34,7 +34,7 @@ const Click = styled.div`
     width:127px;
     height:60px;
     position absolute;
-    top:371px;
+    top:385px;
     left:114px;
     border: 1px solid darkslategray;
     font-size: inherit;
