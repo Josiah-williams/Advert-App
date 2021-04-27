@@ -28,6 +28,9 @@ body {
   border-radius: 6px;
   margin-top: 4px;
 }
+.label {
+  display:unset;
+}
 .tags-input-container:focus-within  {
   border: 1px solid #0052cc;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "../styles.css"
+// import "../styles.css"
 
 function ImageUpload() {
   const uploadedImage = React.useRef(null);
@@ -26,7 +26,8 @@ function ImageUpload() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginBottom:"26px"
       }}
     >
       <input

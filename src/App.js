@@ -89,8 +89,8 @@ const Logo = styled.div`
   height:101px;
   @media ${mobilePortrait} {
     z-index: 1;
-    padding-top: 17px;
-    height: 77px;
+    padding-top: 36px;
+    height: 96px;
     width: 89px;
     .img {
       position: sticky;

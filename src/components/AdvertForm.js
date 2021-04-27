@@ -126,7 +126,6 @@ class AdvertForm extends Component {
     super(props)
     let today = new Date();
     this.state = {
-      addAdverts : {
       days: 0,
       show: true,
       advertName: '',
@@ -136,13 +135,16 @@ class AdvertForm extends Component {
       number: '',
       dateString: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
   }
-}
+
 
   this.handleChange = this.handleChange.bind(this);
   this.handleFormSubmit = this.handleFormSubmit.bind(this);
   this.handleDatepickerChange = this.handleDatepickerChange.bind(this);
   }
   
+  checkKeyDown = (e) => {
+    if (e.code === 'Enter') e.preventDefault();
+  };
   // history = useHistory()
   handleChange = (e) => {
     let value = e.target.value;
@@ -153,7 +155,7 @@ class AdvertForm extends Component {
 }
 
   handleFormSubmit(credentials, setCredentials) {
-    e.preventDefault();
+    // e.preventDefault();
   
     axiosWithAuth()
     .post(
@@ -192,21 +194,15 @@ class AdvertForm extends Component {
   }
 
   IncrementItem = () => {
-    this.setState ({
-      addAdverts : {
-        ...this.state.addAdverts,
-        days:addAdverts.days + 1 }
-    }, () => this.changeDate(this.state.addAdverts.days))
-  
-  }
+    this.setState(state => {
+      return { days: state.days + 1 }
+    }, () => this.changeDate(this.state.days))
+}
 
   DecreaseItem = () => {
-    this.setState(prevState => ({
-        addAdverts : {
-         ...prevState.addAdverts,
-         days : prevState.addAdverts.days - 1 }
+    this.setState(state => {
+      return { days: state.days - 1 }
     }, () => this.changeDate(this.state.days))
-  )
   }
 
   ToggleClick = () => {
@@ -244,10 +240,10 @@ class AdvertForm extends Component {
       <div className="form-container">
       <h1 className="card--title">Promote your website</h1>
         <>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleFormSubmit} onKeyDown={(e) => this.checkKeyDown(e)}>
             <label className="form--label">
               <input
-              required
+              required 
               type="text" 
               id="Advert name" 
               name= "advertName"
@@ -281,7 +277,7 @@ class AdvertForm extends Component {
               />
               <span className="input--label">Country</span>
               </label>
-              <label htmlFor="tags">tags</label>
+              <Label1 htmlFor="tags">tags</Label1>
               <TagsInput selectedTags={selectedTags}
               type="text"
                 id="tags"
@@ -294,14 +290,14 @@ class AdvertForm extends Component {
             }
               <DayIncrement IncrementItem={this.IncrementItem} 
               DecreaseItem={this.DecreaseItem} 
-              days={this.state.addAdverts.days} show={this.state.addAdverts.show} 
+              days={this.state.days} show={this.state.show} 
               name= "days"
               // value= {this.state.addAdverts.days}
               onChange={this.handleChange}
               />
                 {
             }
-              <Calender dateString={this.state.addAdverts.dateString} datePickerHandler={this.handleDatepickerChange} 
+              <Calender dateString={this.state.dateString} datePickerHandler={this.handleDatepickerChange} 
               name="datestring"
               value= {this.state.value} 
               onChange={this.handleChange}
@@ -320,7 +316,7 @@ class AdvertForm extends Component {
               <span className="input--label">How many to run per day</span>
                </label>
                <Link to="/payment">
-               <button className= "button-primary button-big" id= "button" type= "submit">
+               <button onClick={this.handleFormSubmit(this.whatIWantToRunOnSubmit)}className= "button-primary button-big" id= "button" type= "button">
             Submit
             </button>
           </Link>
@@ -339,8 +335,8 @@ const Div = styled.div `
   width: 101%;
   display: flex;
   justify-content: space-between;
-  margin-top:9px;
-  margin-bottom:10px;
+  margin-top:19px;
+  margin-bottom:45px;
 
   & .date-display{
       display: grid;
@@ -393,6 +389,12 @@ const Div = styled.div `
 const Label = styled.div`
   margin-top:20px;
   margin-left:-46px;
+  text-transform: capitalize;
+  font-weight:bolder;
+  `
+const Label1 = styled.div`
+margin-top:-34px;
+text-transform: capitalize;
   `
 const StyledAdd = styled.div`
 .form-container {
@@ -411,7 +413,7 @@ const StyledAdd = styled.div`
   flex-flow: row wrap;
   justify-content: start;
   position: absolute;
-  top: 57%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -433,7 +435,7 @@ const StyledAdd = styled.div`
 }
     .form--input{
       margin-bottom:24px;
-      margin-top:10px;
+      margin-top:-14px;
       position: relative;
       right:-4px;
       max-width:344px;

@@ -15,7 +15,9 @@ import {
   tabletPortraitLarge,} 
 from "../styles/theme.styles"
 
-
+const Label2 = styled.div`
+margin-bottom:-11px
+`
 const Link2Link = styled.div`
 width: 100%;
 .navbar-container {
@@ -223,7 +225,7 @@ resetForm() {
                 className="form--input"
               />
               <span className="input--label">App name</span>
-              <label htmlFor="itemForm__description">logo</label>
+              <Label2 htmlFor="itemForm__description">logo</Label2>
               </label>
               <ImageUpload
                type="image"
@@ -315,7 +317,7 @@ const StyledAdd = styled.div`
 }
     .form--input{
       margin-bottom:10px;
-      margin-top:10px;
+      margin-top:-12px;
     }
   @media ${mobilePortrait} {
     top:58%;

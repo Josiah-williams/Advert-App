@@ -31,20 +31,20 @@ const Button1 = styled.div`
   gap:16px;
   position: absolute;
   right:243px;
-  top:448px;
+  top:463px;
   font-size: 20px;
 
   @media ${mobilePortrait}{
     position: absolute;
     right:227px;
     font-size: 27px;
-    top: 443px;
+    top: 454px;
   }
 `
 const H2 = styled.div`
   position:absolute;
   left:40px;  
-  top:454px;
+  top:463px;
   font-weight: bold;
 `
 const Button2 = styled.div`
@@ -52,14 +52,14 @@ display: flex;
 flex-direction: row;
 position: absolute;
 right:272px;
-top:448px;
+top:463px;
 font-size: 20px;
 
 @media ${mobilePortrait}{
   position: absolute;
   right:259px;
   font-size: 27px;
-  top:442px
+  top:454px
 }
 `
 export default DayIncrement;
