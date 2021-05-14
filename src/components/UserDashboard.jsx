@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext} from "react";
-import advertList from "./user/advertList";
+// import advertList from "./user/advertList";
 import styled from "styled-components";
 import { userContext }  from "../context/userContext"
 import {
