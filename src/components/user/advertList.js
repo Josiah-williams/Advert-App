@@ -1,7 +1,7 @@
 import React from "react";
-import { axiosWithAuth } from "../utils/axios";
+import { axiosWithAuth } from "../../utils/axios";
 import { withRouter } from "react-router-dom";
-import UserDashboard from "./UserDashboard"
+import UserDashboard from "../UserDashboard"
 
 class advertList extends React.Component {
     constructor() {

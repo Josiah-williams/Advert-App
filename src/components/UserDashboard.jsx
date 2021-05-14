@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext} from "react";
-import advertList from "./advertList";
+import advertList from "./user/advertList";
 import styled from "styled-components";
 import { userContext }  from "../context/userContext"
 import {
@@ -13,7 +13,7 @@ from "../styles/theme.styles"
 
 export default function UserDashboard() {
   const adverts = useContext(userContext);
-  const [advertlist, getadverts] = useState([])
+  const [advertList, getadverts] = useState([])
   useEffect(() => {
     getadverts()
   }, [])
