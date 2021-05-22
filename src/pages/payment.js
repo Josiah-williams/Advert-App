@@ -115,8 +115,7 @@ width: 100%;
 `;
 export default function payment() {
   const history = useHistory();
-  
-  function Logout(e){
+  const Logout = e => {
     localStorage.removeItem("token");
     history.push("/login");
   }
