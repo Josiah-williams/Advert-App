@@ -136,7 +136,7 @@ width: 100%;
 `;
 export default function payment() {
   const history = useHistory();
-  const Logout = e => {
+  function Logout(e) {
     localStorage.removeItem("token");
     history.push("/login");
   }
