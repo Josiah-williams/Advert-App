@@ -35,9 +35,9 @@ function App({ appState, user, checkToken, logout }) {
 
     <div className="container">
       <Logo>
-    <div className="logo-div">
+    {/* <div className="logo-div">
           <img src={logo} className="logo" />
-          </div>
+          </div> */}
           </Logo>
     <Switch>
     <Route exact path="/">

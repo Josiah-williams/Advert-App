@@ -7,6 +7,7 @@ import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
 import DayIncrement from "../components/user/Date";
 import '../styles.css';
+import logo from "../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -16,6 +17,26 @@ import {
   tabletPortraitLarge,} 
 from "../styles/theme.styles"
 
+const Logo5 = styled.div`
+.logo {
+  z-index: 1;
+  padding-top: 37px;
+  position: absolute;
+  top: -34px;
+  left:1px;
+  height:101px;
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 38px;
+    height: 96px;
+    width: 89px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+`
 const Link2Link = styled.div`
 width: 100%;
 .navbar-container {
@@ -37,7 +58,7 @@ width: 100%;
       
       @media ${mobilePortrait} {
         z-index: 1;
-        margin-top:-13px;
+        margin-top:2px;
         padding-right:0px
       }
     }
@@ -213,7 +234,7 @@ class AdvertForm extends Component {
       localStorage.removeItem("token");
     };
     const selectedTags = tags => console.log(tags);
-  return (
+  return(
       <div className="nav">
         <Link2Link>
         <header className="navbar-container">
@@ -236,6 +257,11 @@ class AdvertForm extends Component {
         </nav>
       </header>
       </Link2Link>
+            <Logo5>
+            <div className="logo-div">
+          <img src={logo} className="logo" />
+          </div>
+          </Logo5>
     <StyledAdd>
       <div className="form-container">
       <h1 className="card--title">Promote your website</h1>

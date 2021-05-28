@@ -6,6 +6,7 @@ import styled from "styled-components";
 import ImageUpload from "../assets/ImageUpload"
 import Popup from "../components/user/popup"
 import { NavLink, useHistory } from "react-router-dom";
+import logo from "../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -15,6 +16,26 @@ import {
   tabletPortraitLarge,} 
 from "../styles/theme.styles"
 
+const Logo6 = styled.div`
+.logo {
+  z-index: 1;
+  padding-top: 37px;
+  position: absolute;
+  top: -34px;
+  left:1px;
+  height:101px;
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 38px;
+    height: 96px;
+    width: 89px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+`
 const Label2 = styled.div`
 margin-bottom:-11px
 `
@@ -40,7 +61,7 @@ width: 100%;
       @media ${mobilePortrait} {
         z-index: 1;
         padding-top: 10px;
-        margin-top:-13px;
+        margin-top: 14px;
         padding-right:0px
       }
     }
@@ -185,9 +206,14 @@ resetForm() {
     const Logout = e => {
     localStorage.removeItem("token");
     };
-    const { appName, url, color, logo, message, loading, popupMessage, popupIsOpen, responseStatus, sentMessage } = this.state;
+    const { appName, url, color, image, message, loading, popupMessage, popupIsOpen, responseStatus, sentMessage } = this.state;
     return (
       <div className="app">
+        <Logo6>
+            <div className="logo-div">
+          <img src={logo} className="logo" />
+          </div>
+          </Logo6>
       <Link2Link>
         <header className="navbar-container">
         <nav>
@@ -229,9 +255,9 @@ resetForm() {
               </label>
               <ImageUpload
                type="image"
-               id="logo"
-               name="logo"
-               value={logo}
+               id="image"
+               name="image"
+               value={image}
                className="form--input"
               />
               <label className="form--label">
@@ -296,7 +322,7 @@ const StyledAdd = styled.div`
   flex-flow: row wrap;
   justify-content: start;
   position: absolute;
-  top: 50%;
+  top: 63%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -320,7 +346,7 @@ const StyledAdd = styled.div`
       margin-top:-12px;
     }
   @media ${mobilePortrait} {
-    top:58%;
+    top:64%;
     left: 47%;
 }
 `;

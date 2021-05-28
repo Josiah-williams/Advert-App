@@ -6,6 +6,7 @@ import Footer from "../components/user/footer"
 import Navbar from "./user/Navbar";
 import styled from 'styled-components'
 import { useHistory} from "react-router-dom"
+import logo from "../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -14,7 +15,26 @@ import {
   FlexFunc,
   tabletPortraitLarge,} 
   from "../styles/theme.styles"
-
+const Logo3 = styled.div`
+.logo {
+  z-index: 1;
+  padding-top: 37px;
+  position: absolute;
+  top: -34px;
+  left:1px;
+  height:101px;
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 36px;
+    height: 96px;
+    width: 89px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+`
 const Click = styled.div`
 .click-button{
   width:510px;
@@ -41,12 +61,18 @@ const Click = styled.div`
   }
 }`
 const CarouselContainer = ({ images, appState, user, logout }) => {
+  
   const history = useHistory();
   const abc = path => {
     history.push(path);
   };
         return (
           <div>
+            <Logo3>
+            <div className="logo-div">
+          <img src={logo} className="logo" />
+          </div>
+          </Logo3>
           <Navbar appState={appState} user={user} logout={logout} />
           <Carousel>
   <Carousel.Item interval={2000}>

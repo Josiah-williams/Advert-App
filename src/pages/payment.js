@@ -2,6 +2,7 @@ import React from "react";
 import money from "../images/money.svg";
 import { Link, useHistory } from "react-router-dom";
 import styled from 'styled-components';
+import logo from "../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import {
   tabletPortrait,
   tabletLandscape,
@@ -11,6 +12,26 @@ import {
   tabletPortraitLarge,} 
 from "../styles/theme.styles"
 
+const Logo5 = styled.div`
+.logo {
+  z-index: 1;
+  padding-top: 37px;
+  position: absolute;
+  top: -34px;
+  left:1px;
+  height:101px;
+  @media ${mobilePortrait} {
+    z-index: 1;
+    padding-top: 38px;
+    height: 96px;
+    width: 89px;
+    .img {
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+`
 const Link2Link = styled.div`
 width: 100%;
 .navbar-container {
@@ -30,7 +51,7 @@ width: 100%;
       @media ${mobilePortrait} {
         z-index: 1;
         padding-top: 10px;
-        margin-top:40px
+        margin-top:23px
       }
     }
     }
@@ -121,6 +142,11 @@ export default function payment() {
   }
   return (
     <div className="signup">
+       <Logo5>
+            <div className="logo-div">
+          <img src={logo} className="logo" />
+          </div>
+          </Logo5>
         <Link2Link>
         <header className="navbar-container">
         <nav>
