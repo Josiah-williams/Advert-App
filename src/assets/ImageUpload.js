@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+
 
 // import "../styles.css"
 
@@ -49,6 +49,7 @@ function ImageUpload() {
       >
         <img
           ref={uploadedImage}
+          alt=""
           style={{
             width: "100%",
             height: "100%",

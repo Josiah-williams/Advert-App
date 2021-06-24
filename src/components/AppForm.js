@@ -1,19 +1,15 @@
 import React from "react";
 import * as emailjs from 'emailjs-com';
-import { Field, Label, Control, Input, Button, Icon, Textarea, Notification } from 'rbx';
-import { Formik, Form, ErrorMessage} from 'formik';
 import styled from "styled-components";
 import ImageUpload from "../assets/ImageUpload"
-import Popup from "../components/user/popup"
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import {
   tabletPortrait,
   tabletLandscape,
   mobilePortrait,
   mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
 from "../styles/theme.styles"
 
 const Logo6 = styled.div`
@@ -154,10 +150,7 @@ class Appform extends React.Component {
     color: '',
     logo:'',
     message: '',
-    loading: false,
-    popupMessage: '',
-    popupIsOpen: false,
-    responseStatus: false
+    subject: '',
   };
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -167,14 +160,14 @@ class Appform extends React.Component {
 
 handleSubmit(event) {
   event.preventDefault();
-  const {appName,url,color,logo,message,loading,popupMessage,popupIsOpen,responseStatus} = this.state;
+  const {appName,url,color,logo,message,subject} = this.state;
   const templateParams ={
     from_appName: appName,
     from_url: url,
     from_color: color,
     from_logo:logo,
     to_name: '/*YOUR NAME OR COMPANY*/',
-    subject,
+    subject: subject,
     message_html: message,
   };
   emailjs.send(
@@ -185,6 +178,7 @@ handleSubmit(event) {
  )
  this.resetForm();
 };
+
   
 resetForm() {
   this.setState({
@@ -192,6 +186,7 @@ resetForm() {
     url: '',
     color: '',
     logo:'',
+    message: '',
   });
   }
 
@@ -206,12 +201,12 @@ resetForm() {
     const Logout = e => {
     localStorage.removeItem("token");
     };
-    const { appName, url, color, image, message, loading, popupMessage, popupIsOpen, responseStatus, sentMessage } = this.state;
+    const { appName, url, color, image} = this.state;
     return (
       <div className="app">
         <Logo6>
             <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt ="" />
           </div>
           </Logo6>
       <Link2Link>
@@ -287,15 +282,9 @@ resetForm() {
                <button type="submit" className="button-primary button-big">
           submit
         </button>
-              
             </form>
           
-            <Popup 
-            flag={this.state.responseStatus}
-            messsage={this.state.feedbackMessage}
-            handleclick={this.closeFeedback}
-            isOpen={this.state.feedbackIsOpen}
-          />
+           
           </>
       </div>
     </StyledAdd>

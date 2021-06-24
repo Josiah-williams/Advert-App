@@ -8,12 +8,8 @@ import styled from "styled-components";
 import logo from "../../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 // import AboutPage from './AboutPage';
 import {
-  tabletPortrait,
-  tabletLandscape,
   mobilePortrait,
-  mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
 from "../../styles/theme.styles"
 
 const Logo3 = styled.div`
@@ -58,15 +54,6 @@ const Button1 = styled.div`
   @media ${mobilePortrait} {
     width:110%;
 }
-`;
-const Container = styled.div`
-  display: flex;
-`;
-const Column = styled.div`
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 49%;
 `;
 const RegForm = styled.div`
 .form-container {
@@ -167,7 +154,7 @@ export function Register(props) {
             <Form className="form-container">
            <Logo3>
             <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt ="" />
           <h2>Already have an account?</h2><NavLink className="B-link" to="/login" replace><h3>Log in</h3></NavLink>
           </div>
           </Logo3>

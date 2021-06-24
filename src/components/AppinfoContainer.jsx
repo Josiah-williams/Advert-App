@@ -9,8 +9,7 @@ import {
   tabletLandscape,
   mobilePortrait,
   mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
 from "../styles/theme.styles"
 
 const Logo4 = styled.div`
@@ -145,7 +144,7 @@ export default function AppinfoContainer() {
     <div className="signup">
        <Logo4>
             <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt ="" />
           </div>
           </Logo4>
        <Link2Link>

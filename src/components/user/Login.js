@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import Styled from 'styled-components';
@@ -6,14 +6,10 @@ import logo from "../../icons/123924428_705557600377412_3955865959784530213_n.jp
 // import {axiosWithAuth} from "../../utils/axios"
 import axios from 'axios'
 import styled from "styled-components";
-import { Switch, Route, Link,NavLink, useHistory,withRouter } from "react-router-dom";
+import { NavLink, useHistory,withRouter } from "react-router-dom";
 import {
-  tabletPortrait,
-  tabletLandscape,
   mobilePortrait,
-  mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
 from "../../styles/theme.styles"
 
 const Button = styled.div`
@@ -142,10 +138,6 @@ export function Login(props) {
           console.log("login sucessful")
         });
       };
-    
-    function handleType() {
-      setType(!type);
-    }
   
     return (
       
@@ -158,7 +150,7 @@ export function Login(props) {
         <Form className="form-container">
        <Logo2>
         <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt="" />
           <h1>Greenhood</h1>
           </div>
           </Logo2>
@@ -170,7 +162,6 @@ export function Login(props) {
               required
               type="text"
               name="email"
-              required
               className="form--input"
             />
             <span className="input--label">email</span>

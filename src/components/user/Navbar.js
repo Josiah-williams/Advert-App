@@ -1,14 +1,12 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { MenuOutlined } from "@ant-design/icons" 
 import styled from 'styled-components';
 import {
   tabletPortrait,
   tabletLandscape,
   mobilePortrait,
   mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
 from "../../styles/theme.styles"
 
 export default function Navbar({ appState, user, logout }) {
@@ -102,7 +100,7 @@ export default function Navbar({ appState, user, logout }) {
   }
 }
 
-{
+
   /* <nav className="NavBar">
           <Modal />
           <NavLink exact to="/login" activeClassName="active" replace>LOGIN</NavLink> 
@@ -110,7 +108,7 @@ export default function Navbar({ appState, user, logout }) {
           <NavLink exact to="/volunteer/dashboard" activeClassName="active" replace>DASHBOARD</NavLink>
           <NavLink exact to="/business/dashboard" activeClassName="active" replace>DASHBOARD</NavLink> 
         </nav> */
-}
+
 
 const Link2Link = styled.div`
 width: 100%;

@@ -1,8 +1,7 @@
-import React, {Component, useContext} from "react";
-import { NavLink,Link, useHistory,withRouter } from "react-router-dom";
+import React, {Component} from "react";
+import { NavLink,Link,withRouter } from "react-router-dom";
 import styled from "styled-components";
 import {axiosWithAuth} from "../utils/axios"
-import Examples from "./Countries"
 import Calender from "../components/user/Calender"
 import TagsInput from "../components/user/TagsInput";
 import DayIncrement from "../components/user/Date";
@@ -13,8 +12,7 @@ import {
   tabletLandscape,
   mobilePortrait,
   mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
 from "../styles/theme.styles"
 
 const Logo5 = styled.div`
@@ -259,7 +257,7 @@ class AdvertForm extends Component {
       </Link2Link>
             <Logo5>
             <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt= ""/>
           </div>
           </Logo5>
     <StyledAdd>

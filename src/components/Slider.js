@@ -8,12 +8,8 @@ import styled from 'styled-components'
 import { useHistory} from "react-router-dom"
 import logo from "../icons/123924428_705557600377412_3955865959784530213_n.jpg";
 import {
-  tabletPortrait,
-  tabletLandscape,
   mobilePortrait,
-  mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
   from "../styles/theme.styles"
 const Logo3 = styled.div`
 .logo {
@@ -70,7 +66,7 @@ const CarouselContainer = ({ images, appState, user, logout }) => {
           <div>
             <Logo3>
             <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt ="" />
           </div>
           </Logo3>
           <Navbar appState={appState} user={user} logout={logout} />

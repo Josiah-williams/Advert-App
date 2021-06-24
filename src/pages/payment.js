@@ -8,8 +8,7 @@ import {
   tabletLandscape,
   mobilePortrait,
   mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+  } 
 from "../styles/theme.styles"
 
 const Logo5 = styled.div`
@@ -134,9 +133,9 @@ width: 100%;
   flex-direction: column;
 }
 `;
-export default function payment() {
+export default function Payment() {
   const history = useHistory();
-  function Logout(e) {
+  const Logout = e => {
     localStorage.removeItem("token");
     history.push("/login");
   }
@@ -144,7 +143,7 @@ export default function payment() {
     <div className="signup">
        <Logo5>
             <div className="logo-div">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt ="" />
           </div>
           </Logo5>
         <Link2Link>
@@ -155,12 +154,12 @@ export default function payment() {
          
           <ul className="right-navbar">
             <li>
-              <Link className="nav--link" to="/Dashboard" replace>
+              <Link  to="/Dashboard" className="nav--link" replace>
                 Dashboard
               </Link>
             </li>
             <li>
-              <Link className="nav--links" onClick={Logout}>
+              <Link to="/login" className="nav--links" onClick={Logout}>
                 Log Out
               </Link>
             </li>
@@ -171,7 +170,7 @@ export default function payment() {
       <h1>Buy Now</h1>
       <div className="dives">
         <div className="signup-card">
-        <a target="_blank" href="https://paystack.com/buy/unlimited-weekend-vbahtd">
+        <a target="_blank"  href="https://paystack.com/buy/unlimited-weekend-vbahtd"  rel="noopener noreferrer">
             <div className="img-wrapper">
               <img src={money} alt="money" className="sign-up" />
             </div>
@@ -182,7 +181,7 @@ export default function payment() {
           <p>Spend just 100 naira for the weekend for unlimited ads clicks</p>
         </div>
         <div className="signup-card">
-        <a target="_blank" href="https://paystack.com/buy/500-clicks-mcyaew">
+        <a target="_blank" href="https://paystack.com/buy/500-clicks-mcyaew" rel="noopener noreferrer">
             <div className="img-wrapper">
               <img src ={money} alt="money" className="sign-up" />
             </div>

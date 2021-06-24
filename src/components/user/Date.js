@@ -1,13 +1,9 @@
-import React, { Component, useState, useRef } from 'react';
+import React from 'react';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
 import {
-  tabletPortrait,
-  tabletLandscape,
   mobilePortrait,
-  mobileLandscape,
-  FlexFunc,
-  tabletPortraitLarge,} 
+} 
   from "../../styles/theme.styles"
 
 const DayIncrement = props => {
